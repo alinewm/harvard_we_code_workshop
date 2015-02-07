@@ -13,17 +13,23 @@ $(function() {
         .sort(null)
         .value(function(d) {return d.percentage; });
 
+    var stemFields;
+
+    $.get("/majors", function(data) {
+        stemFields = data;
+    });
+
     $.get("/students", function(data) {
         var data = data["All races and ethnicities"] ["Total"]
         var totalStemMajors = data.shift()["All S&E majors"]
 
-        var stemFields = data.map(function(dataPoint){ return d3.keys(dataPoint)[0]})
         color.domain(stemFields);
 
         data.forEach(function(dataPoint){
             dataPoint.major = d3.keys(dataPoint)[0];
             dataPoint.percentage = dataPoint[dataPoint.major]/totalStemMajors
         })
+
 
         var legend = d3.select("body").append("svg")
                                       .attr("class", "legend")

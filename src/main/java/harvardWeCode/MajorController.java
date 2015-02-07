@@ -2,15 +2,17 @@ package harvardWeCode;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/major")
+@RequestMapping("/majors")
 public class MajorController {
 
     @RequestMapping("")
+    @ResponseBody
     public List list() {
         ArrayList<String> majors = new ArrayList<>();
 
