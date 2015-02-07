@@ -63,9 +63,9 @@ public class StudentService {
             femaleOrMale.add("Male");
 
             if(femaleOrMale.contains(title)) {
-                genderRaceOrEthnicityAndPercentages.put(title, creatListOfMajorAndPercent(raceEthnicityOrGenderAndPercentOfMajor));
+                genderRaceOrEthnicityAndPercentages.put(title, createListOfMajorAndPercent(raceEthnicityOrGenderAndPercentOfMajor));
             } else {
-                genderRaceOrEthnicityAndPercentages.put("Total", creatListOfMajorAndPercent(raceEthnicityOrGenderAndPercentOfMajor));
+                genderRaceOrEthnicityAndPercentages.put("Total", createListOfMajorAndPercent(raceEthnicityOrGenderAndPercentOfMajor));
             }
         }
 
@@ -73,12 +73,14 @@ public class StudentService {
         return majorByPercent;
     }
 
-    private List creatListOfMajorAndPercent(String[] raceEthnicityOrGenderAndPercentOfMajor) {
+    private List createListOfMajorAndPercent(String[] raceEthnicityOrGenderAndPercentOfMajor) {
         ArrayList<Object> majorsAndPercentages = new ArrayList<>();
+        Double totalPercentage = Double.valueOf(raceEthnicityOrGenderAndPercentOfMajor[1]);
 
-        for(int iterator = 1; iterator < raceEthnicityOrGenderAndPercentOfMajor.length; iterator++) {
-            HashMap<String, Double> majorToPercentage = new HashMap<>();
-            majorToPercentage.put(majors[iterator], Double.valueOf(raceEthnicityOrGenderAndPercentOfMajor[iterator]));
+        for(int iterator = 2; iterator < raceEthnicityOrGenderAndPercentOfMajor.length; iterator++) {
+            HashMap<String, Object> majorToPercentage = new HashMap<>();
+            majorToPercentage.put("major", majors[iterator]);
+            majorToPercentage.put("percentage", Double.valueOf(raceEthnicityOrGenderAndPercentOfMajor[iterator])/totalPercentage);
             majorsAndPercentages.add(majorToPercentage);
         }
 
