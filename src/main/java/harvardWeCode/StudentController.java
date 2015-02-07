@@ -17,6 +17,6 @@ public class StudentController {
     @RequestMapping("")
     @ResponseBody
     Map home() {
-        return studentService.list();
+        return studentService.list().get("All races and ethnicities");
     }
 }

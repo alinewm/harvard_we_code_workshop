@@ -48,7 +48,7 @@ public class StudentService {
         return filteredStrings;
     }
 
-    public Map list() {
+    public Map<String, Map> list() {
         return studentData;
     }
 

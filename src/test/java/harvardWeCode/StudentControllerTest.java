@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -19,22 +19,23 @@ public class StudentControllerTest {
         StudentController studentController = new StudentController();
         studentController.studentService = mock(StudentService.class);
 
-        HashMap freshmenMajorsByRaceEthnicityAndGender = createTestMajorIntendedData();
+        Map freshmenMajorsByRaceEthnicityAndGender = createTestMajorIntendedData();
         when(studentController.studentService.list()).thenReturn(freshmenMajorsByRaceEthnicityAndGender);
 
-        assertThat(studentController.home(), is(freshmenMajorsByRaceEthnicityAndGender));
+        assertThat(studentController.home(), is(freshmenMajorsByRaceEthnicityAndGender.get("All races and ethnicities")));
     }
 
     @Test
-    public void shouldOnlyReturnTotalPercentages() {
+    public void shouldOnlyReturnDataForAllRacesAndEthnicities() {
         StudentController studentController = new StudentController();
         studentController.studentService = mock(StudentService.class);
 
         HashMap freshmenMajorsByRaceEthnicityAndGender = createTestMajorIntendedData();
         when(studentController.studentService.list()).thenReturn(freshmenMajorsByRaceEthnicityAndGender);
 
-        assertThat(studentController.home().containsKey("All races and ethnicities"), is(true));
-        assertThat(studentController.home().containsKey("Hispanic or Latino"), is(true));
+        assertThat(studentController.home().containsKey("Female"), is(true));
+        assertThat(studentController.home().containsKey("Male"), is(true));
+        assertThat(studentController.home().containsKey("Total"), is(true));
     }
 
     private HashMap createTestMajorIntendedData() {

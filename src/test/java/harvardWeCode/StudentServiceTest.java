@@ -37,7 +37,7 @@ public class StudentServiceTest {
         assertThat(majorsByEthnicityRaceAndGender.containsKey("Female"), is(false));
 
         String asianKey = "Asian";
-        assertThat(majorsByEthnicityRaceAndGender.containsKey(asianKey), is(true));
+        assertThat(((Map) majorsByEthnicityRaceAndGender.get(asianKey)).containsKey("Female"), is(true));
         assertThat(((Map) majorsByEthnicityRaceAndGender.get(asianKey)).containsKey("Female"), is(true));
     }
 

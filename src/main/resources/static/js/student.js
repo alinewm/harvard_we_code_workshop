@@ -20,7 +20,9 @@ $(function() {
     });
 
     $.get("/students", function(data) {
-        var data = data["All races and ethnicities"] ["Total"]
+        var data = data["Total"];
+        var femaleData = data["Female"];
+        var maleData = data["Male"];
         var totalStemMajors = data.shift()["All S&E majors"]
 
         color.domain(stemFields);
