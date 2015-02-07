@@ -1,5 +1,6 @@
 package harvardWeCode;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -36,6 +37,22 @@ public class StudentControllerTest {
         assertThat(studentController.home().containsKey("Female"), is(true));
         assertThat(studentController.home().containsKey("Male"), is(true));
         assertThat(studentController.home().containsKey("Total"), is(true));
+    }
+
+    @Ignore
+    @Test
+    public void shouldReturnDataForTheSpecifiedRace() {
+        StudentController studentController = new StudentController();
+        studentController.studentService = mock(StudentService.class);
+
+        HashMap freshmenMajorsByRaceEthnicityAndGender = createTestMajorIntendedData();
+        when(studentController.studentService.list()).thenReturn(freshmenMajorsByRaceEthnicityAndGender);
+
+        Map<String, Object>  studentIntentionsToMajor = studentController.get("White");
+
+        assertThat(studentIntentionsToMajor.containsKey("Female"), is(true));
+        assertThat(studentIntentionsToMajor.containsKey("Male"), is(true));
+        assertThat(studentIntentionsToMajor.containsKey("Total"), is(true));
     }
 
     private HashMap createTestMajorIntendedData() {
